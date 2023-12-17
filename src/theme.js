@@ -1,8 +1,12 @@
 const theme = {
   colors: {
-    textPrimary: '#24292e',
+    primary: '#37474F',
+    primaryDark: '#263238',
+    primaryLight: '#455A64',
+    textPrimary: '#24292E',
     textSecondary: '#586069',
-    primary: '#0366d6',
+    textLight: '#FFF',
+    darken: 'rgba(0, 0, 0, 0.3)',
   },
   fontSizes: {
     body: 14,
