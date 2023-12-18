@@ -5,13 +5,16 @@ import { StatusBar } from 'expo-status-bar';
 
 import { Text } from './common';
 import theme from '../theme';
+import { useNavigate } from 'react-router-native';
 
 const tabs = [
   {
     title: 'Repositories',
+    path: '/',
   },
   {
-    title: 'Placeholder',
+    title: 'Sign in',
+    path: '/signin',
   },
 ];
 
@@ -55,6 +58,7 @@ const AppBarTab = ({ tab, isActive, setActive }) => (
 
 const AppBar = () => {
   const [activeTab, setActiveTab] = useState(tabs[0].title);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -66,7 +70,10 @@ const AppBar = () => {
             key={tab.title}
             tab={tab}
             isActive={activeTab === tab.title}
-            setActive={() => setActiveTab(tab.title)}
+            setActive={() => {
+              setActiveTab(tab.title);
+              navigate(tab.path);
+            }}
           />
         ))}
       </View>
