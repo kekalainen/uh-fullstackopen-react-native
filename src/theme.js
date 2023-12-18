@@ -6,6 +6,7 @@ const theme = {
     textPrimary: '#24292E',
     textSecondary: '#586069',
     textLight: '#FFF',
+    card: '#FFF',
     darken: 'rgba(0, 0, 0, 0.3)',
   },
   fontSizes: {
@@ -19,6 +20,7 @@ const theme = {
     normal: '400',
     bold: '700',
   },
+  borderRadius: 8,
 };
 
 export default theme;
