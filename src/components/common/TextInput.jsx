@@ -10,10 +10,18 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.primaryLightest,
     borderRadius: theme.borderRadius,
   },
+  formFieldInvalid: {
+    marginBottom: 0,
+    borderColor: theme.colors.error,
+  },
 });
 
 const TextInput = ({ style, error, ...props }) => {
-  const textInputStyle = [styles.formField, style];
+  const textInputStyle = [
+    styles.formField,
+    error && styles.formFieldInvalid,
+    style,
+  ];
 
   return (
     <NativeTextInput

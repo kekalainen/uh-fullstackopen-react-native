@@ -5,6 +5,7 @@ const theme = {
     primaryLight: '#455A64',
     primaryLighter: '#90A4AE',
     primaryLightest: '#ECEFF1',
+    error: '#D84315',
     textPrimary: '#24292E',
     textSecondary: '#586069',
     textLight: '#FFF',
