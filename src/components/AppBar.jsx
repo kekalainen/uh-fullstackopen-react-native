@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, StyleSheet, Pressable } from 'react-native';
+import { View, StyleSheet, Pressable, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import { StatusBar } from 'expo-status-bar';
 
@@ -65,17 +65,19 @@ const AppBar = () => {
       <StatusBar style="light" />
       <View style={styles.topRibbon} />
       <View style={styles.container}>
-        {tabs.map((tab) => (
-          <AppBarTab
-            key={tab.title}
-            tab={tab}
-            isActive={activeTab === tab.title}
-            setActive={() => {
-              setActiveTab(tab.title);
-              navigate(tab.path);
-            }}
-          />
-        ))}
+        <ScrollView horizontal>
+          {tabs.map((tab) => (
+            <AppBarTab
+              key={tab.title}
+              tab={tab}
+              isActive={activeTab === tab.title}
+              setActive={() => {
+                setActiveTab(tab.title);
+                navigate(tab.path);
+              }}
+            />
+          ))}
+        </ScrollView>
       </View>
     </>
   );
