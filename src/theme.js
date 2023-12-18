@@ -3,6 +3,7 @@ const theme = {
     primary: '#37474F',
     primaryDark: '#263238',
     primaryLight: '#455A64',
+    primaryLighter: '#90A4AE',
     primaryLightest: '#ECEFF1',
     textPrimary: '#24292E',
     textSecondary: '#586069',
