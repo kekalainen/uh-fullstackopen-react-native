@@ -3,7 +3,7 @@ import { View, StyleSheet, Pressable } from 'react-native';
 import Constants from 'expo-constants';
 import { StatusBar } from 'expo-status-bar';
 
-import Text from './Text';
+import { Text } from './common';
 import theme from '../theme';
 
 const tabs = [
