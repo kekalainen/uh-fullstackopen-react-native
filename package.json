@@ -10,6 +10,7 @@
     "lint": "eslint ./src/**/*.{js,jsx} App.js --no-error-on-unmatched-pattern"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.8",
     "@expo/webpack-config": "^0.17.0",
     "expo": "~46.0.21",
     "expo-status-bar": "~1.4.0",
