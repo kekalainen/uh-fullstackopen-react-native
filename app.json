@@ -28,6 +28,10 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "API_HOSTNAME": "valine",
+      "REST_API_PORT": "5000"
     }
   }
 }
