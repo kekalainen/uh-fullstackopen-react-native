@@ -10,15 +10,20 @@ class AuthStorage {
   }
 
   getAccessToken() {
-    return AsyncStorage.getItem(constructKey(KEY_ACCESS_TOKEN));
+    return AsyncStorage.getItem(constructKey(this.namespace, KEY_ACCESS_TOKEN));
   }
 
   setAccessToken(accessToken) {
-    return AsyncStorage.setItem(constructKey(KEY_ACCESS_TOKEN), accessToken);
+    return AsyncStorage.setItem(
+      constructKey(this.namespace, KEY_ACCESS_TOKEN),
+      accessToken
+    );
   }
 
   removeAccessToken() {
-    return AsyncStorage.removeItem(constructKey(KEY_ACCESS_TOKEN));
+    return AsyncStorage.removeItem(
+      constructKey(this.namespace, KEY_ACCESS_TOKEN)
+    );
   }
 }
 
