@@ -1,3 +1,7 @@
+import 'dotenv/config';
+
+const { API_HOSTNAME, GRAPHQL_API_PORT, REST_API_PORT } = process.env;
+
 export default {
   name: 'uh-fullstackopen-react-native',
   slug: 'uh-fullstackopen-react-native',
@@ -27,8 +31,8 @@ export default {
     favicon: './assets/favicon.png',
   },
   extra: {
-    API_HOSTNAME: 'valine',
-    GRAPHQL_API_PORT: '4000',
-    REST_API_PORT: '5000',
+    API_HOSTNAME,
+    GRAPHQL_API_PORT,
+    REST_API_PORT,
   },
 };
