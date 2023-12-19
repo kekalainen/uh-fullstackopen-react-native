@@ -1,10 +1,10 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import Constants from 'expo-constants';
 
-const { API_HOSTNAME, GRAPHQL_API_PORT } = Constants.manifest.extra;
+const { GRAPHQL_API_URI } = Constants.manifest.extra;
 
 const httpLink = createHttpLink({
-  uri: `http://${API_HOSTNAME}:${GRAPHQL_API_PORT}/graphql`,
+  uri: GRAPHQL_API_URI,
 });
 
 const defaultOptions = {
