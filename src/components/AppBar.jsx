@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { View, StyleSheet, Pressable, ScrollView } from 'react-native';
+import { useNavigate } from 'react-router-native';
 import Constants from 'expo-constants';
 import { StatusBar } from 'expo-status-bar';
 
 import { Text } from './common';
 import theme from '../theme';
-import { useNavigate } from 'react-router-native';
 
 const tabs = [
   {
