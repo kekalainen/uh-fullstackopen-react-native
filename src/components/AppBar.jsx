@@ -19,6 +19,11 @@ const tabs = [
     path: '/signin',
     authState: false,
   },
+  {
+    title: 'Sign out',
+    path: '/signout',
+    authState: true,
+  },
 ];
 
 const topRibbonHeight = Constants.statusBarHeight;
