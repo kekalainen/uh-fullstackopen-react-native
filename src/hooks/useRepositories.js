@@ -1,30 +1,13 @@
-import { useState, useEffect } from 'react';
-import Constants from 'expo-constants';
+import { useQuery } from '@apollo/client';
 
-const { API_HOSTNAME, REST_API_PORT } = Constants.manifest.extra;
+import { GET_REPOSITORIES } from '../graphql/queries';
 
 const useRepositories = () => {
-  const [repositories, setRepositories] = useState();
-  const [loading, setLoading] = useState(false);
+  const { data, loading, refetch } = useQuery(GET_REPOSITORIES);
 
-  const fetchRepositories = async () => {
-    setLoading(true);
+  const repositories = data?.repositories;
 
-    const response = await fetch(
-      `http://${API_HOSTNAME}:${REST_API_PORT}/api/repositories`
-    );
-
-    const json = await response.json();
-
-    setLoading(false);
-    setRepositories(json);
-  };
-
-  useEffect(() => {
-    fetchRepositories();
-  }, []);
-
-  return { repositories, loading, refetch: fetchRepositories };
+  return { repositories, loading, refetch };
 };
 
 export default useRepositories;
