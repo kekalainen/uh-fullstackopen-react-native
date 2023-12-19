@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import * as yup from 'yup';
 
 import { Button, Card, FormikTextInput } from './common';
+import useSignIn from '../hooks/useSignIn';
 
 const initialValues = {
   username: '',
@@ -29,8 +30,16 @@ const SignInForm = ({ onSubmit }) => (
 );
 
 const SignIn = () => {
-  const onSubmit = (values) => {
-    console.log(values);
+  const { signIn } = useSignIn();
+
+  const onSubmit = async ({ username, password }) => {
+    try {
+      const { data } = await signIn({ username, password });
+
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
