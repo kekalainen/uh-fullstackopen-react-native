@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/client';
 import { useState } from 'react';
 import { View, StyleSheet, Pressable, ScrollView } from 'react-native';
 import { useNavigate } from 'react-router-native';
@@ -5,6 +6,7 @@ import Constants from 'expo-constants';
 import { StatusBar } from 'expo-status-bar';
 
 import { Text } from './common';
+import { GET_ME } from '../graphql/queries';
 import theme from '../theme';
 
 const tabs = [
@@ -15,6 +17,7 @@ const tabs = [
   {
     title: 'Sign in',
     path: '/signin',
+    authState: false,
   },
 ];
 
@@ -57,8 +60,15 @@ const AppBarTab = ({ tab, isActive, setActive }) => (
 );
 
 const AppBar = () => {
+  const { data } = useQuery(GET_ME);
   const [activeTab, setActiveTab] = useState(tabs[0].title);
   const navigate = useNavigate();
+
+  const isAuthenticated = typeof data?.me?.id === 'string';
+
+  const enabledTabs = tabs.filter(({ authState }) => {
+    return typeof authState === 'undefined' || authState === isAuthenticated;
+  });
 
   return (
     <>
@@ -66,7 +76,7 @@ const AppBar = () => {
       <View style={styles.topRibbon} />
       <View style={styles.container}>
         <ScrollView horizontal>
-          {tabs.map((tab) => (
+          {enabledTabs.map((tab) => (
             <AppBarTab
               key={tab.title}
               tab={tab}
