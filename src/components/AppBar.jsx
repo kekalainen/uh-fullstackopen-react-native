@@ -15,6 +15,11 @@ const tabs = [
     path: '/',
   },
   {
+    title: 'Create a review',
+    path: '/reviews/create',
+    authState: true,
+  },
+  {
     title: 'Sign in',
     path: '/signin',
     authState: false,
