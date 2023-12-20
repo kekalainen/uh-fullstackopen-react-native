@@ -19,7 +19,7 @@ const Repository = () => {
 
   return (
     <View style={styles.container}>
-      <RepositoryItem {...data.repository} />
+      <RepositoryItem {...data.repository} externalLink />
     </View>
   );
 };

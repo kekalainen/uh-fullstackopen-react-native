@@ -1,8 +1,10 @@
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, Linking, StyleSheet, View } from 'react-native';
 
-import { Badge, Card, Stat, Text } from './common';
+import { Badge, Button, Card, Stat, Text } from './common';
 import { formatNumber } from '../utils';
 import theme from '../theme';
+
+const repositoryUrlBase = 'https://github.com';
 
 const avatarDimension = 48;
 
@@ -26,6 +28,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
+  externalLink: {
+    marginTop: 20,
+  },
 });
 
 const RepositoryItem = ({
@@ -37,6 +42,7 @@ const RepositoryItem = ({
   ratingAverage,
   reviewCount,
   stargazersCount,
+  externalLink,
 }) => (
   <Card testID="repository-item">
     <View style={styles.overview}>
@@ -57,6 +63,14 @@ const RepositoryItem = ({
       <Stat title="Reviews" value={formatNumber(reviewCount)} />
       <Stat title="Rating" value={ratingAverage} />
     </View>
+    {externalLink && (
+      <Button
+        onPress={() => Linking.openURL(`${repositoryUrlBase}/${fullName}`)}
+        style={styles.externalLink}
+      >
+        Open in GitHub
+      </Button>
+    )}
   </Card>
 );
 
