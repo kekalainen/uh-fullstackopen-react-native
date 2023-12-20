@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const Card = ({ children, ...props }) => (
-  <View style={styles.container} {...props}>
+const Card = ({ children, style, ...props }) => (
+  <View style={[styles.container, style]} {...props}>
     {children}
   </View>
 );
