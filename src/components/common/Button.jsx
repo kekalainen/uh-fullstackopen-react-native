@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const Button = ({ onPress, children }) => (
-  <View style={styles.wrapper}>
+const Button = ({ onPress, children, style }) => (
+  <View style={[styles.wrapper, style]}>
     <Pressable
       onPress={onPress}
       android_ripple={{ color: theme.colors.darken }}
