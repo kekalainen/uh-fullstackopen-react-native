@@ -22,3 +22,12 @@ export const GET_REPOSITORIES = gql`
     }
   }
 `;
+
+export const GET_REPOSITORY = gql`
+  ${CORE_REPOSITORY_FIELDS}
+  query GetRepository($id: ID!) {
+    repository(id: $id) {
+      ...CoreRepositoryFields
+    }
+  }
+`;
