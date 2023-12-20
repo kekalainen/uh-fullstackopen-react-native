@@ -7,6 +7,7 @@ import Repository from './Repository';
 import RepositoryList from './RepositoryList';
 import SignIn from './SignIn';
 import SignOut from './SignOut';
+import SignUp from './SignUp';
 import theme from '../theme';
 
 const styles = StyleSheet.create({
@@ -26,6 +27,7 @@ const Main = () => {
         <Route path="/reviews/create" element={<CreateReview />}></Route>
         <Route path="/repositories/:id" element={<Repository />}></Route>
         <Route path="/signin" element={<SignIn />}></Route>
+        <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/signout" element={<SignOut />}></Route>
         <Route path="/" element={<Navigate to="/" replace />}></Route>
       </Routes>

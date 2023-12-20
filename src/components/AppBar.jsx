@@ -25,6 +25,11 @@ const tabs = [
     authState: false,
   },
   {
+    title: 'Sign up',
+    path: '/signup',
+    authState: false,
+  },
+  {
     title: 'Sign out',
     path: '/signout',
     authState: true,
