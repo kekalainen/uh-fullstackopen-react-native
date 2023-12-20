@@ -39,7 +39,7 @@ const RepositoryItem = ({
   reviewCount,
   stargazersCount,
 }) => (
-  <Card>
+  <Card testID="repository-item">
     <View style={styles.overview}>
       <Image source={{ uri: ownerAvatarUrl }} style={styles.avatar} />
       <View style={{ flexShrink: 1 }}>
