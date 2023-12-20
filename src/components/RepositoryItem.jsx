@@ -9,7 +9,6 @@ const avatarDimension = 48;
 const styles = StyleSheet.create({
   overview: {
     display: 'flex',
-    flex: 1,
     flexDirection: 'row',
     marginBottom: 20,
   },
