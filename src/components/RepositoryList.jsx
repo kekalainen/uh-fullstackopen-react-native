@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-native';
 import { Card, TextInput } from './common';
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
+import useDebounce from '../hooks/useDebounce';
 
 const orderingOptions = {
   latest: {
@@ -104,9 +105,10 @@ export const RepositoryListContainer = ({
 const RepositoryList = () => {
   const [ordering, setOrdering] = useState(Object.keys(orderingOptions)[0]);
   const [searchKeyword, setSearchKeyword] = useState('');
+  const [searchKeywordDebounced] = useDebounce(searchKeyword);
   const { repositories } = useRepositories({
     ...orderingOptions[ordering],
-    searchKeyword,
+    searchKeyword: searchKeywordDebounced,
   });
   const navigate = useNavigate();
 
