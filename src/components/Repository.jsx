@@ -7,6 +7,8 @@ import RepositoryItem from './RepositoryItem';
 import { GET_REPOSITORY } from '../graphql/queries';
 import theme from '../theme';
 
+const reviewsPerPage = 4;
+
 const reviewRatingDimension = 40;
 
 const styles = StyleSheet.create({
@@ -64,11 +66,23 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 const Repository = () => {
   const { id } = useParams();
-  const { data } = useQuery(GET_REPOSITORY, { variables: { id } });
+  const { data, loading, fetchMore } = useQuery(GET_REPOSITORY, {
+    variables: { id, first: reviewsPerPage },
+  });
 
   if (!data?.repository) return null;
 
   const { repository } = data;
+
+  const wrappedFetchMore = () => {
+    if (loading || !repository.reviews.pageInfo.hasNextPage) return;
+
+    fetchMore({
+      variables: {
+        after: repository.reviews.pageInfo.endCursor,
+      },
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -76,6 +90,9 @@ const Repository = () => {
         data={repository.reviews.edges.map(({ node }) => node)}
         keyExtractor={({ id }) => id}
         renderItem={({ item }) => <ReviewItem {...item} />}
+        onEndReached={wrappedFetchMore}
+        onEndReachedThreshold={0.2}
+        initialNumToRender={reviewsPerPage}
         ItemSeparatorComponent={ItemSeparator}
         ListHeaderComponent={
           <View style={styles.listHeader}>

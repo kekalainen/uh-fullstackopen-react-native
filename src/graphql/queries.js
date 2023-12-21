@@ -33,11 +33,12 @@ export const GET_REPOSITORIES = gql`
 
 export const GET_REPOSITORY = gql`
   ${CORE_REPOSITORY_FIELDS}
-  query GetRepository($id: ID!) {
+  query GetRepository($id: ID!, $first: Int, $after: String) {
     repository(id: $id) {
       ...CoreRepositoryFields
-      reviews {
+      reviews(first: $first, after: $after) {
         edges {
+          cursor
           node {
             id
             createdAt
@@ -47,6 +48,10 @@ export const GET_REPOSITORY = gql`
               username
             }
           }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
         }
       }
     }
