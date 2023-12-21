@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { FlatList, View, StyleSheet, Pressable } from 'react-native';
 import { useNavigate } from 'react-router-native';
 
+import { Card, TextInput } from './common';
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
 
@@ -31,6 +32,13 @@ const styles = StyleSheet.create({
   listHeader: {
     marginBottom: 10,
   },
+  searchCard: {
+    marginBottom: 10,
+    padding: 0,
+  },
+  searchInput: {
+    marginBottom: 0,
+  },
   separator: {
     height: 10,
   },
@@ -38,8 +46,17 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryListHeader = ({ ordering, setOrdering }) => (
+const RepositoryListHeader = ({ ordering, setOrdering, setSearchKeyword }) => (
   <View style={styles.listHeader}>
+    <Card style={styles.searchCard}>
+      <TextInput
+        onChange={({ nativeEvent: { text } }) => setSearchKeyword(text)}
+        placeholder="Search"
+        inputMode="search"
+        returnKeyType="search"
+        style={styles.searchInput}
+      />
+    </Card>
     <Picker selectedValue={ordering} onValueChange={setOrdering}>
       {Object.keys(orderingOptions).map((key) => (
         <Picker.Item
@@ -57,6 +74,7 @@ export const RepositoryListContainer = ({
   onPress,
   ordering,
   setOrdering,
+  setSearchKeyword,
 }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
@@ -67,7 +85,11 @@ export const RepositoryListContainer = ({
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
       ListHeaderComponent={
-        <RepositoryListHeader ordering={ordering} setOrdering={setOrdering} />
+        <RepositoryListHeader
+          ordering={ordering}
+          setOrdering={setOrdering}
+          setSearchKeyword={setSearchKeyword}
+        />
       }
       renderItem={({ item }) => (
         <Pressable onPress={() => onPress(item)}>
@@ -81,7 +103,11 @@ export const RepositoryListContainer = ({
 
 const RepositoryList = () => {
   const [ordering, setOrdering] = useState(Object.keys(orderingOptions)[0]);
-  const { repositories } = useRepositories(orderingOptions[ordering]);
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const { repositories } = useRepositories({
+    ...orderingOptions[ordering],
+    searchKeyword,
+  });
   const navigate = useNavigate();
 
   return (
@@ -90,6 +116,7 @@ const RepositoryList = () => {
       onPress={(item) => navigate(`/repositories/${item.id}`)}
       ordering={ordering}
       setOrdering={setOrdering}
+      setSearchKeyword={setSearchKeyword}
     />
   );
 };
